@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form  method="post" th:action="@{/redirectToOriginalWithParameter}">
+    <div class="row px-5">
+        <div class="card mb-2 ">
+            <div class="card-header py-3">
+                <h5 class="mb-0 text-danger">Get Short URL</h5>
+            </div>
+            <div class="card-body">
+
+                <div class="row mb-2">
+                    <div class="col-md-9">
+                        <label th:text="shortUrl" style="margin-right: 15px;"></label>
+                        <a th:href="${urlInfo.originalUrl}" th:name="shortUrl"  th:text="${urlInfo.shortUrl}"></a>
+                    </div>
+                </div>
+
+
+                <!-- Text input -->
+                <div class="row mb-2">
+                    <div class="col-md-9">
+                        <label th:text="originalUrl"  style="margin-right: 15px;"></label>
+                        <a th:href="${urlInfo.originalUrl}"  th:text="${urlInfo.originalUrl}"></a>
+                    </div>
+                </div>
+
+                <input name="urlId" type="hidden" th:value="${urlInfo.id}">
+
+
+                <div class="form-group row" style="margin-top: 50px;">
+                    <label class="col-4 col-form-label" style="color: #525fff">Add Parameter To Short Link </label>
+                    <div class="col-8">
+                        <input th:value="${urlInfo.shortUrl}" th:name="shortUrlWithParameter"></input></div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Redirect Original With Parameter</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+</body>
+</html>

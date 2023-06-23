@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        user url
+    </title>
+
+    <style>
+        table {
+            margin: 3px;
+            padding: 3px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid;
+            padding: 5px;
+        }
+
+        tr:hover {
+            background-color: #fff26d;
+        }
+
+    </style>
+</head>
+<body>
+<form th:action="@{/createShortUrl}" method="post">
+    <div class="row px-5">
+        <div class="card mb-2 ">
+            <div class="card-header py-3">
+                <h5 class="mb-0 text-danger">Get Urls List And Convert To Short URL</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-md">
+                        <label th:text="'Hello  ' + ${userInfo.userName}"></label>
+                    </div>
+                </div>
+
+                <input name="userName" type="hidden" th:value="${userInfo.userName}">
+
+                <!-- Text input -->
+                <div class="row mb-2">
+                    <div class="col-md-9">
+                        <label th:text="originalUrl"></label>
+                        <input type="text" th:name="originalUrl" th:value="${urlInfo.originalUrl}"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div>
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </div>
+    </div>
+
+
+    <div th:if="${ not#lists.isEmpty(urls)}" style="margin-top: 10px;">
+        <table>
+            <tr>
+                <th>shortUrl</th>
+                <th>Click to view site visit count</th>
+                <th>create date</th>
+                <th>Operation</th>
+            </tr>
+            <tr th:each="url : ${urls}">
+<!--                <td><a th:href="${url.originalUrl}" th:text="${url.shortUrl}"></a></td>-->
+                <td><a class="btn btn-warning" th:text="${url.shortUrl}" th:href="@{/redirectToOriginal/{id}(id=${url.getId()})}"></a></td>
+                <td><a class="btn btn-warning" th:text="ClickCount" th:href="@{/countOfClick/{id}(id=${url.getId()})}"></a></td>
+                <td th:text="${url.createDate}"> </td>
+                <td><a class="btn btn-warning" th:href="@{/deleteLink/{id}(id=${url.getId()})}">Delete</a></td>
+
+            </tr>
+        </table>
+    </div>
+
+</form>
+
+</body>
+</html>

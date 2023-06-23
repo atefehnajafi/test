@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container text-center">
+
+    <h2 th:if="${count}" style="color: brown;"> Count Click :
+        <span th:text="${count}"></span>
+    </h2>
+
+    <h2 th:if="!${count}" style="color: brown;"> Count Click :
+        <span >This link has not been clicked yet</span>
+    </h2>
+
+</div>
+</body>
+</html>
